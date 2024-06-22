@@ -67,7 +67,7 @@ func SubmitCurrentPod() (success bool) {
 	gas := utilis.GenerateRandomWithFavour(510, 1000, [2]int{520, 700}, 0.7)
 	gasFees := fmt.Sprintf("%damf", gas)
 	log.Info().Str("module", "junction").Str("Gas Fees Used to Validate VRF", gasFees)
-	accountClient, err := cosmosclient.New(ctx, cosmosclient.WithAddressPrefix(addressPrefix), cosmosclient.WithNodeAddress(jsonRpc), cosmosclient.WithHome(accountPath), cosmosclient.WithGas("auto"), cosmosclient.WithFees(gasFees))
+	accountClient, err := cosmosclient.New(ctx, cosmosclient.WithAddressPrefix(addressPrefix), cosmosclient.WithNodeAddress(jsonRpc), cosmosclient.WithHome(accountPath), cosmosclient.WithGas("auto"), cosmosclient.WithGasAdjustment(1.5), cosmosclient.WithGasPrices("0.0005amf"))
 	if err != nil {
 		logs.Log.Error("Switchyard client connection error")
 		logs.Log.Error(err.Error())
